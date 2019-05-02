@@ -1,0 +1,5 @@
+args:
+  # kubelet 을 찾지 못하는 이슈 수정
+  - --kubelet-preferred-address-types=InternalIP
+  # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
+  - --kubelet-insecure-tls
