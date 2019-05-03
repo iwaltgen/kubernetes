@@ -3,8 +3,13 @@
 
 ## kubernetes init
 
-```
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+```sh
+# swap on (optional)
+sed -i '9s/^/Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"\n/' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+systemctl daemon-reload
+systemctl restart kubelet
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors Swap | sudo tee kubeadm_init_output
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -16,13 +21,13 @@ kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
 
 ## kubernetes single node (optional)
 
-```
+```sh
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
 ## kubernetes reset
 
-```
+```sh
 sudo kubeadm reset
 ```
 
