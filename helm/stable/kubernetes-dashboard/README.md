@@ -21,3 +21,9 @@ kubectl edit svc/kubernetes-dashboard -n kube-system
 ```sh
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep kubernetes-dashboard-admin-token | awk '{print $1}')
 ```
+
+## uninstall
+
+```sh
+helm del kubernetes-dashboard --purge
+```
