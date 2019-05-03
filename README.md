@@ -1,6 +1,8 @@
 
 # kubernetes setup
 
+[k8s 설치](https://jwcheong0420.github.io/2018/08/09/how-to-install-k8s/)
+
 ## kubernetes init
 
 ```sh
@@ -30,4 +32,3 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 ```sh
 sudo kubeadm reset
 ```
-
