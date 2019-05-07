@@ -27,6 +27,12 @@ kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
+## kubernetes create RABC defaults
+
+```sh
+kubectl apply -f rabc/defaults/cluster_reader.yaml
+```
+
 ## kubernetes reset
 
 ```sh

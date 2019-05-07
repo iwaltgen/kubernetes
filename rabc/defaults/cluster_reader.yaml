@@ -1,0 +1,91 @@
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cluster-reader
+  namespace: kube-public
+  labels:
+    keecon.com/in-house: rbac-defaults
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-read-all
+  namespace: kube-public
+  labels:
+    keecon.com/in-house: rbac-defaults
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+rules:
+- apiGroups:
+  - ""
+  - apps
+  - autoscaling
+  - batch
+  - extensions
+  - policy
+  - rbac.authorization.k8s.io
+  - storage.k8s.io
+  resources:
+  - componentstatuses
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - events
+  - endpoints
+  - horizontalpodautoscalers
+  - ingress
+  - ingresses
+  - jobs
+  - limitranges
+  - namespaces
+  - nodes
+  - pods
+  - pods/log
+  - pods/exec
+  - persistentvolumes
+  - persistentvolumeclaims
+  - resourcequotas
+  - replicasets
+  - replicationcontrollers
+  - serviceaccounts
+  - services
+  - statefulsets
+  - storageclasses
+  - clusterroles
+  - roles
+  verbs:
+  - get
+  - watch
+  - list
+- nonResourceURLs:
+  - "*"
+  verbs:
+    - get
+    - watch
+    - list
+- apiGroups:
+  - ""
+  resources:
+  - pods/exec
+  verbs:
+  - create
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-read-all
+  namespace: kube-public
+  labels:
+    keecon.com/in-house: rbac-defaults
+subjects:
+- kind: ServiceAccount
+  name: cluster-reader
+  namespace: kube-public
+roleRef:
+  kind: ClusterRole
+  name: cluster-read-all
+  apiGroup: rbac.authorization.k8s.io
