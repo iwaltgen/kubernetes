@@ -1,0 +1,9 @@
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+
+serviceAccount:
+  create: false
+
+analytics:
+  enabled: false
