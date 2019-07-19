@@ -5,5 +5,9 @@ rbac:
 serviceAccount:
   create: false
 
+apiserver:
+  sparse:
+    enabled: "true"
+
 analytics:
   enabled: false
