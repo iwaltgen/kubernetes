@@ -1,13 +1,35 @@
-rbac:
-  # Specifies whether RBAC resources should be created
-  create: true
-
-serviceAccount:
-  create: false
-
 apiserver:
   sparse:
     enabled: "true"
+  nodeSelector:
+    node: openebs
+
+provisioner:
+  nodeSelector:
+    node: openebs
+
+snapshotOperator:
+  nodeSelector:
+    node: openebs
+
+admission-server:
+  nodeSelector:
+    node: openebs
+
+ndm:
+  sparse:
+    enabled: "true"
+    path: "/var/openebs/sparse"
+    size: "10737418240"
+    count: "1"
+  filters:
+    excludeVendors: "CLOUDBYT,OpenEBS"
+    excludePaths: "loop,fd0,sr0,/dev/fd0,/dev/sr0,/dev/ram,/dev/dm-,/dev/md"
+  nodeSelector:
+    node: openebs
+
+jiva:
+  replicas: 1
 
 analytics:
   enabled: false
